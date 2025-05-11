@@ -1,0 +1,810 @@
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --text-color: #1f2937;
+    --bg-color: #f8fafc;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif; /* Добавлено для единообразия */
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease; /* Плавное изменение цвета */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
+
+/* Стили хедера */
+.header {
+    background-color: white; /* Изменен цвет фона */
+    color: var(--text-color);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0; /* Более светлая граница */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    box-sizing: border-box;
+    box-shadow: var(--shadow); /* Добавлена тень */
+}
+
+.header.hidden {
+    transform: translateY(-100%);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px; /* Уменьшен размер логотипа */
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.5rem; /* Более крупный шрифт */
+    font-weight: 600;
+    color: var(--primary-color); /* Цвет как в основном оформлении */
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #f1f5f9;
+    color: var(--text-color);
+    border: 1px solid #e2e8f0;
+}
+
+.button:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень при наведении */
+}
+
+.button.primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+    border: none;
+}
+
+.button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Стили корзины */
+.cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+    color: var(--text-color); /* Иконка корзины белого цвета */
+    transition: transform 0.2s ease-in-out; /* Анимация масштабирования */
+}
+
+.cart-icon i {
+    font-size: 24px;
+}
+
+.cart-icon:hover {
+    transform: scale(1.2); /* Увеличение при наведении */
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--error-color);
+    color: white;
+    border-radius: 50%;
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px; /* Увеличенный радиус */
+    width: 500px;
+    text-align: center;
+    box-shadow: var(--shadow); /* Добавлена тень */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #94a3b8; /* Нейтральный цвет */
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--text-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 24px; /* Увеличенный отступ */
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px; /* Увеличенные отступы */
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    outline: none;
+}
+
+.form-group textarea {
+    height: 120px;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 80px; /* Уменьшен верхний отступ */
+    margin-bottom: 40px; /* Уменьшен нижний отступ */
+    margin-left: 200px;
+    font-size: 1rem; /* Уменьшен размер шрифта */
+    color: #94a3b8;
+}
+
+.logo-link {
+    margin-right: 16px;
+    display: block;
+    text-decoration: none;
+}
+
+.logo1 {
+    width: 20px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo1:hover {
+    transform: scale(1.1);
+}
+
+.breadcrumb-links {
+    display: flex;
+    align-items: center;
+}
+
+.home-link {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.home-link:hover {
+    color: var(--primary-color);
+}
+
+.separator {
+    margin: 0 8px;
+    color: #cbd5e1;
+}
+
+.current-page {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Plane cards styles */
+.plane-cards-wrapper {
+    background-color: var(--bg-color);
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1000px; /* Увеличена ширина */
+}
+
+.plane-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.plane-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    background-color: white; /* Белый фон */
+    border-radius: 12px; /* Скругленные углы */
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    position: relative;
+    box-shadow: var(--shadow); /* Добавлена тень */
+}
+
+.plane-card:hover {
+    transform: scale(1.03); /* Незначительное увеличение при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Контейнер для изображения */
+.plane-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.plane-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease; /* Добавлена плавная анимация при наведении */
+}
+
+.plane-card:hover img {
+    transform: scale(1.1); /* Увеличение изображения при наведении на карточку */
+}
+
+.plane-card-info {
+    padding: 16px;
+    background-color: white;
+}
+
+.plane-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.plane-details {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+.add-to-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box; /* Важно, чтобы padding не ломал ширину */
+    margin-top: 16px; /* Добавляем отступ сверху */
+}
+
+.add-to-cart-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 16px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-button {
+    background-color: #f1f5f9;
+    border: none;
+    padding: 8px 12px;
+    margin: 0 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-button:hover {
+    background-color: #e2e8f0;
+}
+
+/* Стили для итоговой суммы корзины */
+.cart-total {
+    text-align: right;
+    margin-top: 24px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    padding-top: 16px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.cart-total b {
+    font-weight: bold;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;  /* Уменьшил отступы */
+    border-radius: 10px;
+    width: 600px; /* Немного увеличил ширину */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 80vh; /* Ограничение максимальной высоты */
+    overflow-y: auto; /* Добавляем прокрутку, если контент не помещается */
+}
+
+#cart-items {
+    margin-bottom: 15px;  /* Добавляем отступ снизу */
+}
+
+/* Position the "flying-item" container */
+#flying-item {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    z-index: 1100;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Add transition for smooth effect */
+}
+
+#flying-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Футер */
+.footer {
+    background-color: white; /* Изменен цвет фона */
+    color: var(--text-color);
+    padding: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer-section {
+    width: 20%;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-section li:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.footer-section a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    background-color: white; /* Изменен цвет фона */
+    color: #64748b;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Логотип в футере */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.1);
+}
+
+.footer-logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.footer-logo span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+.social-icon {
+    width: 20px; /* Размер иконок */
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle; /* Выравнивание по центру текста */
+    transition: transform 0.3s ease; /* Плавное вращение при наведении */
+}
+
+.social-icon:hover {
+    transform: rotate(360deg); /* Вращение при наведении */
+}
+
+/* Окно оформления заказа */
+.order-form {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: left;
+}
+
+.order-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.order-form .form-group {
+    margin-bottom: 20px;
+}
+
+.order-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.order-form input[type="text"],
+.order-form input[type="email"],
+.order-form input[type="tel"],
+.order-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.order-form textarea {
+    height: 150px;
+}
+
+.order-form input[type="text"]:focus,
+.order-form input[type="email"]:focus,
+.order-form input[type="tel"]:focus,
+.order-form textarea:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+.order-form .button.primary {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.order-form .button.primary:hover {
+    background-color: #218838;
+}
+
+.order-form .cart-items {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.order-form .cart-items h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.order-form .cart-items ul {
+    list-style: none;
+    padding: 0;
+}
+
+.order-form .cart-items li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-form .cart-items li:last-child {
+    border-bottom: none;
+}
+
+.order-form .cart-items img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.order-form .cart-items .item-name {
+    font-weight: bold;
+}
+
+.order-form .cart-items .item-price {
+    color: #555;
+}
+
+#orderModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001; /* Higher than other modals */
+    overflow: auto;
+}
+
+#orderModal .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 700px; /* Slightly wider than other modals */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 90vh; /* Increased maximum height */
+    overflow-y: auto; /* Ensure scrollability */
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+        justify-content: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .nav-links li {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .header-actions {
+        justify-content: center;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .breadcrumb {
+        margin-left: 10px;
+        font-size: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo-link {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .plane-cards-wrapper {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .plane-cards-container {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .plane-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .footer-section {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+}
+

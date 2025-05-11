@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="img/Logo.svg" alt="Логотип">
+            <span class="logo-text">Plane Sale</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="proizvoditeli.html">Производители</a></li>
+            <li><a href="aviablog.html">Авиаблог</a></li>
+        </ul>
+        <div class="buttons">
+            <button class="button" id="loginBtn">Войти</button>
+            <button class="button" id="sellBtn">Продать</button>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для входа -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">×</span>
+            <h2>Вход</h2>
+            <p>Пожалуйста, введите свои данные для входа:</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Имя пользователя:</label><br>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label><br>
+                    <input type="password" id="password" name="password">
+                </div>
+                <button type="submit" class="button primary">Войти</button>
+            </form>
+            <p>Еще нет аккаунта? <a href="#" id="openRegisterModalLink">Зарегистрироваться</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для регистрации -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterModal">×</span>
+            <h2>Регистрация</h2>
+            <p>Создайте новый аккаунт:</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Имя пользователя:</label><br>
+                    <input type="text" id="registerUsername" name="registerUsername">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label><br>
+                    <input type="email" id="registerEmail" name="registerEmail">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Пароль:</label><br>
+                    <input type="password" id="registerPassword" name="registerPassword">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите пароль:</label><br>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                </div>
+                <button type="submit" class="button primary">Зарегистрироваться</button>
+            </form>
+            <p>Уже зарегистрированы? <a href="#" id="openLoginModalLink">Войти</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для продажи -->
+    <div id="sellModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeSellModal">×</span>
+            <h2>Продать самолет</h2>
+            <p>Заполните форму ниже, чтобы разместить объявление о продаже:</p>
+            <form id="sellForm">
+                <div class="form-group">
+                    <label for="planeModel">Модель самолета:</label>
+                    <input type="text" id="planeModel" name="planeModel">
+                </div>
+                <div class="form-group">
+                    <label for="planePhoto">Фотография самолета:</label>
+                    <input type="file" id="planePhoto" name="planePhoto">
+                </div>
+                <div class="form-group">
+                    <label for="price">Цена (USD):</label>
+                    <input type="number" id="price" name="price">
+                </div>
+                <div class="form-group">
+                    <label for="contactName">Ваше имя:</label>
+                    <input type="text" id="contactName" name="contactName">
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Ваш email:</label>
+                    <input type="email" id="contactEmail" name="contactEmail">
+                </div>
+                <div class="form-group">
+                    <label for="contactPhone">Ваш телефон:</label>
+                    <input type="tel" id="contactPhone" name="contactPhone">
+                </div>
+                <div class="form-group">
+                    <label for="description">Описание самолета:</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <button type="submit" class="button primary">Продать</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно скидки -->
+    <div id="discountModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeDiscountModal">×</span>
+            <h2>Специальное предложение!</h2>
+            <div class="discount-badge">-5%</div>
+            <p>Только для вас - специальная скидка 5% на все самолеты!</p>
+            <p>Предложение действует:</p>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <span id="days">07</span>
+                    <span>дней</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">23</span>
+                    <span>часов</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">59</span>
+                    <span>минут</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">59</span>
+                    <span>секунд</span>
+                </div>
+            </div>
+            <button class="button primary" id="useDiscountBtn">Использовать скидку</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно "Требуется авторизация" -->
+    <div id="authRequiredModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('authRequiredModal')">×</span>
+            <h2>Требуется авторизация</h2>
+            <p id="authRequiredMessage"></p>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="button primary" onclick="openModal('loginModal'); closeModal('authRequiredModal')">Войти</button>
+                <button class="button" onclick="openModal('registerModal'); closeModal('authRequiredModal')">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно профиля -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('profile-modal')">×</span>
+            <h2>Профиль</h2>
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <img id="profile-avatar" src="img/default-avatar.png" alt="Аватар">
+                </div>
+                <div class="profile-details">
+                    <p>Имя: <span id="profile-username"></span></p>
+                    <p>Email: <span id="profile-email"></span></p>
+                </div>
+            </div>
+            <h3>Редактировать профиль</h3>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editUsername">Имя пользователя:</label>
+                    <input type="text" id="editUsername" name="editUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" name="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAvatar">Аватар:</label>
+                    <input type="file" id="editAvatar" name="editAvatar" accept="image/*">
+                </div>
+                <button type="button" class="button primary" onclick="updateProfile()">Сохранить изменения</button>
+            </form>
+            <button class="button" id="logoutBtn" style="margin-top: 20px;">Выйти</button>
+        </div>
+    </div>
+
+    <section class="category-selection">
+        <h2>Покупка и продажа самолетов и вертолетов</h2>
+        <p>Выберите категорию</p>
+        <div class="category-container">
+            <div class="category" onclick="checkAuthAndNavigate('proizvod.html')">
+                <img src="img/plane.png" alt="Самолет">
+                <h3>Самолет</h3>
+            </div>
+            <div class="category" onclick="checkAuthAndNavigate('helicopter-list.html')">
+                <img src="img/helicopter.png" alt="Вертолет">
+                <h3>Вертолет</h3>
+            </div>
+        </div>
+    </section>
+    <section class="info-section">
+        <div class="info-text">
+            <h2>Хочешь купить самолет своей мечты?</h2>
+            <p>Сайт sk-plane.com поможет тебе в этом!</p>
+            <ul>
+                <li><img src="img/free-icon-arrow-right.svg" alt="Большая база самолетов">Большая база самолетов</li>
+                <li><img src="img/free-icon-arrow-left.svg" alt="2 мировые валюты">Поддержка 2 мировых валют ($ €)</li>
+            </ul>
+        </div>
+        <div class="plane-image">
+            <img id="bigPlane" src="img/big plane.png" alt="Самолет">
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-section">
+            <div class="footer-logo">
+                <img src="logo futer index/Group 9.svg" alt="Логотип">
+                <span>PlaneSale</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Категории</h3>
+            <ul>
+                <li><a href="#">Купить одномоторный самолет</a></li>
+                <li><a href="#">Купить многомоторный самолет</a></li>
+                <li><a href="#">Купить турбовинтовой самолет</a></li>
+                <li><a href="#">Купить частный JET</a></li>
+                <li><a href="#">Купить частный вертолет</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Популярные производители</h3>
+            <ul>
+                <li><a href="#">Cessna</a></li>
+                <li><a href="#">Piper</a></li>
+                <li><a href="#">Beechcraft</a></li>
+                <li><a href="#">Robinson</a></li>
+                <li><a href="#">Cirrus</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Социальные сети</h3>
+            <ul>
+                <li><a href="#"><img src="/logo futer index/icons8-vk-50 2.svg" alt="Вконтакте" class="social-icon"> Вконтакте</a></li> 
+                <li><a href="#"><img src="/logo futer index/pngwing.com 2.svg" alt="Email" class="social-icon"> Email</a></li> 
+            </ul>
+        </div>
+    </footer>
+
+    <div class="footer-bottom">
+        © PlaneSale, 2018-2025
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
